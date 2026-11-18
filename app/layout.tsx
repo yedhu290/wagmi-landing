@@ -1,8 +1,10 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Space_Grotesk } from 'next/font/google';
 import './globals.css';
 import { ModalProvider } from './context/ModalContext';
 import PlausibleAnalytics from './components/PlausibleAnalytics';
+import { SITE_URL } from './lib/site';
+import { structuredData } from './lib/structured-data';
 
 const spaceGrotesk = Space_Grotesk({
     variable: '--font-space-grotesk',
@@ -11,6 +13,9 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
+    // Without metadataBase Next resolves relative URLs against VERCEL_URL,
+    // which emitted og:image on a different host than the canonical tag.
+    metadataBase: new URL(SITE_URL),
     title: 'Wagmi Workspace | Premium Coworking Space in Kochi, Kerala',
     description:
         'Wagmi Workspace offers premium coworking spaces, private cabins, meeting rooms, and virtual office solutions in Kochi, Kerala. Flexible plans for startups, freelancers, and remote teams.',
@@ -48,19 +53,12 @@ export const metadata: Metadata = {
     openGraph: {
         type: 'website',
         locale: 'en_IN',
-        url: 'https://wagmiworkspace.com',
+        url: SITE_URL,
         siteName: 'Wagmi Workspace',
         title: 'Wagmi Workspace | Premium Coworking Space in Kochi, Kerala',
         description:
             'Discover premium coworking spaces, private cabins, and flexible office solutions at Wagmi Workspace in Kochi, Kerala. Perfect for startups, freelancers, and teams.',
-        images: [
-            {
-                url: '/img/og-image.jpg',
-                width: 1200,
-                height: 630,
-                alt: 'Wagmi Workspace - Premium Coworking Space',
-            },
-        ],
+        // Image comes from app/opengraph-image.tsx.
     },
     twitter: {
         card: 'summary_large_image',
@@ -69,21 +67,24 @@ export const metadata: Metadata = {
         title: 'Wagmi Workspace | Premium Coworking Space in Kochi',
         description:
             'Premium coworking spaces, private cabins, and flexible office solutions in Kochi, Kerala.',
-        images: ['/img/og-image.jpg'],
+        // Image comes from app/twitter-image.tsx.
     },
     alternates: {
-        canonical: 'https://wagmiworkspace.com',
+        canonical: SITE_URL,
     },
+    // favicon-32x32.png, favicon-16x16.png and apple-touch-icon.png were listed
+    // here but do not exist. app/favicon.ico and app/apple-icon.tsx cover those.
+    // An explicit icons block overrides Next's file conventions, so the
+    // generated apple icon has to be listed here too.
     icons: {
-        icon: [
-            { url: '/favicon.svg', type: 'image/svg+xml' },
-            { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-            { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-        ],
-        apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
+        icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
+        apple: [{ url: '/apple-icon', sizes: '180x180', type: 'image/png' }],
     },
-    manifest: '/site.webmanifest',
     category: 'business',
+};
+
+export const viewport: Viewport = {
+    themeColor: '#6676d2',
 };
 
 export default function RootLayout({
@@ -92,43 +93,12 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
+        <html lang="en-IN">
             <head>
                 <PlausibleAnalytics />
                 <script
                     type="application/ld+json"
-                    dangerouslySetInnerHTML={{
-                        __html: JSON.stringify({
-                            '@context': 'https://schema.org',
-                            '@type': 'LocalBusiness',
-                            name: 'Wagmi Workspace',
-                            description:
-                                'Premium coworking space offering flexible office solutions in Kochi, Kerala',
-                            url: 'https://wagmiworkspace.com',
-                            telephone: '+91-8129988389',
-                            email: 'admin@wagmiworkspace.com',
-                            address: {
-                                '@type': 'PostalAddress',
-                                streetAddress: 'AN Square, Unichira Thoppil Rd, Marottichuvadu',
-                                addressLocality: 'Edappally, Kochi',
-                                addressRegion: 'Kerala',
-                                postalCode: '682021',
-                                addressCountry: 'IN',
-                            },
-                            geo: {
-                                '@type': 'GeoCoordinates',
-                                latitude: 10.02991,
-                                longitude: 76.31988,
-                            },
-                            openingHours: 'Mo-Sa 09:00-18:00',
-                            priceRange: '$$',
-                            image: 'https://wagmiworkspace.com/img/og-image.jpg',
-                            sameAs: [
-                                'https://x.com/Wagmiworkspace',
-                                'https://www.instagram.com/wagmiworkspace',
-                            ],
-                        }),
-                    }}
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
                 />
             </head>
             <body className={`${spaceGrotesk.variable} antialiased`}>

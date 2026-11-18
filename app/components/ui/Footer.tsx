@@ -46,22 +46,22 @@ const Footer = () => {
                             <h3 className="text-lg font-bold text-white">Services</h3>
                             <ul className="flex flex-col gap-3 text-gray-400 text-sm">
                                 <li>
-                                    <a href="#" className="hover:text-primary transition-colors">
+                                    <a href="#spaces" className="hover:text-primary transition-colors">
                                         HotDesk
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" className="hover:text-primary transition-colors">
+                                    <a href="#spaces" className="hover:text-primary transition-colors">
                                         Dedicated Desk
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" className="hover:text-primary transition-colors">
+                                    <a href="#spaces" className="hover:text-primary transition-colors">
                                         Private Cabin
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" className="hover:text-primary transition-colors">
+                                    <a href="#spaces" className="hover:text-primary transition-colors">
                                         Virtual Office
                                     </a>
                                 </li>
