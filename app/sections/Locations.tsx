@@ -7,6 +7,7 @@ import Button from '../components/Button';
 import { useModal } from '../context/ModalContext';
 
 import type { MapProps } from '../components/Map';
+import { locations, primaryLocation } from '../data/locations';
 
 // Dynamically import Map to avoid SSR issues
 const Map = dynamic<MapProps>(() => import('../components/Map'), {
@@ -34,7 +35,7 @@ const contactInfo = [
         title: 'Visit us',
         subtitle: 'Drop by our main office.',
         link: 'AN Square, Edappally, Kochi',
-        href: '#',
+        href: `https://www.google.com/maps/search/?api=1&query=${primaryLocation.coords[0]},${primaryLocation.coords[1]}`,
     },
     {
         icon: BiPhoneCall,
@@ -45,43 +46,6 @@ const contactInfo = [
     },
 ];
 
-const locations = [
-    {
-        id: 1,
-        city: 'Edappally',
-        address: 'Wagmi Coworking and Managed Office Space, Edappally, Kochi',
-        phone: '+91 8129988389',
-        coords: [10.029910609588125, 76.31987714232802] as [number, number],
-    },
-    {
-        id: 2,
-        city: 'HMT, Kalamassery',
-        address: 'Wagmi Workspace, Seaport - Airport Rd, HMT, Kalamassery, Kochi.',
-        phone: '+91 8129988389',
-        coords: [10.04483620546756, 76.33748702883598] as [number, number],
-    },
-    {
-        id: 3,
-        city: 'Pathadipalam',
-        address: '31/133A , EM Commercial Centre, Koonamthai, Edappally, Ernakulam, Kerala, 682024',
-        phone: '+91 8129988389',
-        coords: [10.034117082818941, 76.31340045582007] as [number, number],
-    },
-    {
-        id: 4,
-        city: 'Thrikkakara',
-        address: 'Thrikkakara Heights, 1917, Ward No. 4, Thrikkakara, Kochi, Kerala Pin: 682021',
-        phone: '+91 8129988389',
-        coords: [10.034435049088826, 76.33335142265261] as [number, number],
-    },
-    {
-        id: 5,
-        city: 'Kalamassery',
-        address: 'Eloor Kizhakkumbhagam, Kalamassery, Ernakulam, Kerala 683501',
-        phone: '+91 8129988389',
-        coords: [10.074248597727571, 76.30968859354948] as [number, number],
-    },
-];
 
 const Locations = () => {
     const { openContactModal } = useModal();

@@ -22,8 +22,8 @@ const Home = () => {
                 <KnowMore />
                 <Testimonials />
                 <Locations />
-                <Footer />
             </main>
+            <Footer />
         </div>
     );
 };

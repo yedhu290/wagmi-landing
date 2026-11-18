@@ -38,7 +38,7 @@ const Hero = () => {
                         />
                     </motion.div>
 
-                    <motion.h2
+                    <motion.p
                         className="text-sm md:text-base font-bold tracking-wider text-gray-900 uppercase"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -46,7 +46,7 @@ const Hero = () => {
                     >
                         Wagmi - Modern and flexible coworking office space solution for
                         professionals, startups and teams
-                    </motion.h2>
+                    </motion.p>
 
                     <motion.h1
                         className="text-5xl md:text-7xl font-extrabold text-dark leading-[1.1]"
