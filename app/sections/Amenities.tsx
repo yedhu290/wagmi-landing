@@ -183,11 +183,15 @@ const Amenities = () => {
                             initial="rest"
                             whileHover="hover"
                             animate="rest"
+                            // The list is tripled for the infinite marquee; the
+                            // clones repeat every heading and alt text, so they
+                            // are exposed as decorative.
+                            aria-hidden={index >= amenities.length}
                         >
                             {/* Background Image */}
                             <Image
                                 src={item.image}
-                                alt={item.title}
+                                alt={index < amenities.length ? item.title : ''}
                                 fill
                                 className="object-cover transition-transform duration-500 group-hover:scale-110"
                             />
