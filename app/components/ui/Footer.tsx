@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { BiMap, BiPhone, BiEnvelope } from 'react-icons/bi';
 
@@ -46,24 +47,24 @@ const Footer = () => {
                             <h3 className="text-lg font-bold text-white">Services</h3>
                             <ul className="flex flex-col gap-3 text-gray-400 text-sm">
                                 <li>
-                                    <a href="#spaces" className="hover:text-primary transition-colors">
+                                    <Link href="/#spaces" className="hover:text-primary transition-colors">
                                         HotDesk
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li>
-                                    <a href="#spaces" className="hover:text-primary transition-colors">
+                                    <Link href="/#spaces" className="hover:text-primary transition-colors">
                                         Dedicated Desk
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li>
-                                    <a href="#spaces" className="hover:text-primary transition-colors">
+                                    <Link href="/#spaces" className="hover:text-primary transition-colors">
                                         Private Cabin
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li>
-                                    <a href="#spaces" className="hover:text-primary transition-colors">
+                                    <Link href="/#spaces" className="hover:text-primary transition-colors">
                                         Virtual Office
-                                    </a>
+                                    </Link>
                                 </li>
                             </ul>
                         </div>
@@ -143,12 +144,18 @@ const Footer = () => {
                         </span>
                     </div>
                     <div className="flex gap-6">
-                        <a href="#" className="hover:text-white transition-colors">
+                        <Link
+                            href="/privacy-policy"
+                            className="hover:text-white transition-colors"
+                        >
                             Privacy Policy
-                        </a>
-                        <a href="#" className="hover:text-white transition-colors">
+                        </Link>
+                        <Link
+                            href="/terms-of-service"
+                            className="hover:text-white transition-colors"
+                        >
                             Terms of Service
-                        </a>
+                        </Link>
                     </div>
                 </div>
 
