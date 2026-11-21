@@ -38,9 +38,21 @@ const Map = ({ center, zoom, locations }: MapProps) => {
             scrollWheelZoom={true} // Enabled scroll/pinch zoom
             style={{ height: '100%', width: '100%' }}
         >
+            {/*
+                CARTO now gates its basemaps behind an API key and serves an
+                "API KEY REQUIRED" watermark tile without one, so the base layer
+                comes from Esri's free light grey canvas. That canvas ships
+                without place names, hence the separate reference overlay.
+                Note Esri orders its tile path {z}/{y}/{x}, not {z}/{x}/{y}.
+            */}
             <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-                url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+                attribution='Tiles &copy; <a href="https://www.esri.com/">Esri</a> &mdash; Esri, HERE, Garmin, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"
+                maxZoom={16}
+            />
+            <TileLayer
+                url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}"
+                maxZoom={16}
             />
             {locations.map((loc) => (
                 <Marker key={loc.id} position={loc.coords} icon={primaryIcon}>
